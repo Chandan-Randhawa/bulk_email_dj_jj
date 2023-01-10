@@ -140,3 +140,5 @@ EMAIL_HOST_USER = 'zsrandhawa@gmail.com'
 EMAIL_HOST_PASSWORD = 'amjmbtnkcojwlaqa'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-d31e.up.railway.app']
