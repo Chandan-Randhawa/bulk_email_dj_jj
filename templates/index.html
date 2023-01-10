@@ -1,0 +1,68 @@
+{% load static %}
+<html>
+    <head>
+        <title>ICMR PROJECT</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{% static 'email_dj.css' %}">
+
+   <!-- bootstrap 4 -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- script -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+    <!-- font awesome cdn version 6.2.1 may be -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        h2{
+            animation:blinkingText 0.5s infinite;
+        }
+        @keyframes blinkingText{
+            0%{     color: red;    }
+            40%{    color: ornage; }
+            60%{    color: pink; }
+            90%{    color:transparent;  }
+            100%{   color: green;    }
+        }
+    </style>
+
+    </head>
+
+    <body class="body1">
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mt-5 heading">
+                    <h1 class="text-center  head">Welcome to Bulk Email Sender App </h1>
+                    <h2 class="text-center head">Please Log In</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 form1">
+                
+                        <a class="btn btn-primary" style = "margin-left :183px" href="{% url 'login' %}">Log In</a>
+                        <a class= "btn btn-secondary" href = "{% url 'signup' %}"> Sign Up</a>
+
+                  
+            </div>
+            
+        </div>
+</form>
+
+    </body>
+</html>

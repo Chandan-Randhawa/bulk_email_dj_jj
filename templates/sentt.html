@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'email_dj.css' %}">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sent Mail</title>
+</head>
+<body>
+    <h1 style = 'font-size:52px; margin: auto; margin-left :25px' >Mail Has been Sent !!!</h1>
+    <h2 style = 'font-size:25px; margin: auto; margin-left :127px' >Sender's List is below</h2>
+
+    <div class = 'scroll'>
+        {% for x in li  %}
+        <li> {{x}}<br><br> </li>
+        {% endfor %} 
+    </div>
+
+    <h1 style = 'font-size:52px; margin: auto; margin-left :736px ; margin-top:-340px' >Undelivered Mail !!!</h1>
+    <h2 style = 'font-size:25px; margin: auto; margin-left :823px; margin-top:-3px' >Undelivered Sender's List</h2>
+
+    <div class = 'scroll_2'>
+        {% for x in ln  %}
+        <li> {{x}}<br><br> </li>
+        {% endfor %} 
+    </div>
+    <div>
+        <a class="b11" style = "margin-left:511px" href="{% url 'home' %}">send New Mail</a>
+        <a class= "b12" href = "{% url 'logout' %}">Logout</a>
+    </div> 
+</body>
+</html>
