@@ -3,4 +3,5 @@ gunicorn==20.1.0
 requests==2.26.0
 uvicorn==0.15.0
 pywhatkit==5.3
+django-widget-tweaks==1.4.12
 gspread==5.7.2
