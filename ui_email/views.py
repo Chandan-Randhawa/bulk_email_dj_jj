@@ -4,12 +4,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail , EmailMessage
 import gspread
+from django.views.decorators.csrf import csrf_protect
 
 
 # Create your views here.
 def index(request):
     return render(request , 'index.html')
 
+@csrf_protect
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -26,6 +28,7 @@ def signup(request):
 
     return render(request , 'signup_page.html', {'form': form})
 
+@csrf_protect
 @login_required
 def home(request):
     if request.method == 'POST':
