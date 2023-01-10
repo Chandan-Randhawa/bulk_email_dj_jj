@@ -1,1 +1,1 @@
-web gunicorn email_django.wsgi --log-file -
+web: gunicorn email_django.wsgi --log-file -
