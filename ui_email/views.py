@@ -45,7 +45,7 @@ def home(request):
                 print(type(msgg))
                 msg = eval(f"f'''{msgg}'''")
                 print(msg)
-                email = EmailMessage(sub , msg , 'zsrandhawa@gmail.com' , [i['Email ID']])
+                email = EmailMessage(sub , msg , 'mjosephjohn@cmcludhiana.in' , [i['Email ID']])
                 for f in files:
                     email.attach(f.name , f.read() , f.content_type)
                 email.send()

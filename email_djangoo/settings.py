@@ -140,8 +140,8 @@ LOGOUT_REDIRECT_URL ='index'
 LOGIN_URL ='index'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'zsrandhawa@gmail.com'
-EMAIL_HOST_PASSWORD = 'amjmbtnkcojwlaqa'
+EMAIL_HOST_USER = 'mjosephjohn@cmcludhiana.in'
+EMAIL_HOST_PASSWORD = 'amoowrldoigqmfdc'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
