@@ -2,7 +2,11 @@ from django.shortcuts import render , redirect ,HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail , EmailMessage
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email import encoders
 import gspread
 from django.views.decorators.csrf import csrf_protect
 
@@ -41,19 +45,33 @@ def home(request):
         li = []
         ln =[]
         for i in wks.get_all_records():
-            try:
-                print(type(msgg))
-                msg = eval(f"f'''{msgg}'''")
-                print(msg)
-                email = EmailMessage(sub , msg , 'mjosephjohn@cmcludhiana.in' , [i['Email ID']])
-                for f in files:
-                    email.attach(f.name , f.read() , f.content_type)
-                email.send()
-                print(f"mail has been sent to : {i['Email ID']}")
-                li.append(i['Email ID']) 
-            except:
-                print(f"mail has nott been sent to : {i['Email ID']}")
-                ln.append(i['Email ID']) 
+            if i['Email ID'] != '': 
+                try:
+                    print(type(msgg))
+                    msggg = eval(f"f'''{msgg}'''")
+                    print(msggg)
+                    msg = MIMEMultipart()
+                    msg['From'] = 'mjosephjohn@cmcludhiana.in'
+                    msg['To'] = i['Email ID']
+                    msg['Subject'] = sub
+                    msg.attach(MIMEText(msggg))
+                    for fi in files:
+                        part = MIMEBase('application', "octet-stream")
+                        part.set_payload(fi.read())
+                        encoders.encode_base64(part)
+                        part.add_header('Content-Disposition', 'attachment', filename = fi.name)
+                        msg.attach(part)
+                    server = smtplib.SMTP('smtp.gmail.com', 587)
+                    server.starttls()
+                    server.login('mjosephjohn@cmcludhiana.in', 'amoowrldoigqmfdc')
+                    server.sendmail('mjosephjohn@cmcludhiana.in', i['Email ID'], msg.as_string())
+                    server.quit()
+                    print(f"mail has been sent to : {i['Email ID']}")
+                    li.append(i['Email ID']) 
+                except Exception as e:
+                    print(e)
+                    print(f"mail has nott been sent to : {i['Email ID']}")
+                    ln.append(i['Email ID']) 
         context ={'li' :li,'ln':ln}
         return render(request , 'sentt.html' , context)
     gc = gspread.service_account(filename='sheetAuth3.json')
