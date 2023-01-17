@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect ,HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-import smtplib
+import smtplib , ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
@@ -61,11 +61,12 @@ def home(request):
                         encoders.encode_base64(part)
                         part.add_header('Content-Disposition', 'attachment', filename = fi.name)
                         msg.attach(part)
-                    server = smtplib.SMTP('smtp.gmail.com', 587)
-                    server.starttls()
-                    server.login('mjosephjohn@cmcludhiana.in', 'amoowrldoigqmfdc')
-                    server.sendmail('mjosephjohn@cmcludhiana.in', i['Email ID'], msg.as_string())
-                    server.quit()
+                    context = ssl.create_default_context()
+                    with smtplib.SMTP_SSL("smtp.gmail.com" , 465 , context=context) as server:
+                        server.ehlo()
+                        server.login(msg['From'], 'amoowrldoigqmfdc')
+                        server.sendmail(msg['From'], msg['To'], msg.as_string())
+                        server.quit()
                     print(f"mail has been sent to : {i['Email ID']}")
                     li.append(i['Email ID']) 
                 except Exception as e:
